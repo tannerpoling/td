@@ -1,0 +1,7 @@
+basic visualizer for sleepyeyes- saw u last nite
+
+1. DONE get desired audio loop
+2. sine wave with circles
+3. spinning + moving boxes with slits in them
+4. drawing + erasing lines (no idea how to do this, might be better as an animation)
+5. appearing + disappearing stars
