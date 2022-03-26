@@ -1,0 +1,5 @@
+2022 03 25
+VJ mixer tutorial (Ragan)
+- Can click the little blue and yellow question mark for any operator to get it's python documentation!
+- Base COMP has great function "findChildren()", use for getting list of all children that fit a certain criteria: by type, dimension, name, etc. Crazy.
+  - ex: base_simple_vj/container_basic_vj/container_visuals/container_realtime/cahce1 cache size param
