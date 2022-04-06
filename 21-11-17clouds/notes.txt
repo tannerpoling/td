@@ -1,1 +1,0 @@
-trying to randomly generate clouds using instancing in touchdesigner
