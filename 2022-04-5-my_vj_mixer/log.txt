@@ -1,0 +1,14 @@
+Log
+
+2022 04 06
+- get rid of the button layout screen thing. pointless in my case, requires a bunch of fiddling with comp resolutions and layout stuff
+- figuring out how to basically have some huge composite TOP with the outputs of every thing going into it
+  - would be good to control whether each effect is being cooked to save on resources
+  - effect container COMP
+    - controls container COMP
+      - 3 sliders hooked up to output of container COMP
+    - output_control button COMP
+      - sliders are linked all the way from controls COMP to imported tox
+      - imported effect tox
+        - sliders get mapped to desired range within imported tox
+    
