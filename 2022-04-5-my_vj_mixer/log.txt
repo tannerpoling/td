@@ -1,5 +1,14 @@
 Log
 
+2022 04 19
+- audio driven stuff, using internal audio of computer
+  - requires vb cable: https://vb-audio.com/Cable/
+- worked on shifting squares a bit
+- composite / effect layering, from bottom to top:
+  - spinning globes
+  - tanagachi animation
+  - corner gradient bass kick
+
 2022 04 06
 - get rid of the button layout screen thing. pointless in my case, requires a bunch of fiddling with comp resolutions and layout stuff
 - figuring out how to basically have some huge composite TOP with the outputs of every thing going into it
