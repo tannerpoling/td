@@ -1,4 +1,14 @@
 Log
+2022 04 30
+- idea compositing effects instead of using 2 decks like tutorial
+  - each effect has 2 outputs now: one to render on the button, and one 
+    that actually gets sent out to the final composite
+    - the one going to the final composite has a level CHOP before out_final
+    - this level CHOP has opacity controlled by on/off button clicked state
+    - effect1 has working example
+- copy and pasting effect containers didn't work for some reason
+  - had to set up output_onoff button from scratch, still not sure why
+
 
 2022 04 19
 - audio driven stuff, using internal audio of computer
