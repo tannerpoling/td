@@ -1,11 +1,8 @@
 Backup/*
-*.mp3
-<<<<<<< HEAD
 tutorial_links
-=======
 sleepy/*.mp3
 *.mov
+*.mp3
 *.mp4
 *.png
 *.jpg
->>>>>>> 4438976ecedcece1799cfa363ceb9be1dd6ae9ef
