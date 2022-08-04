@@ -1,0 +1,7 @@
+- making cache table DAT
+  - our tableUpdate script is already working every frame
+  - idea: init cache table to all zeros; every frame grab the current
+    dataTable value and put at cache[1279], then go backwards 1278-0
+    updating each cell with the one before it
+    - note! 'DAT Execute' operator runs a script every time another DAT's
+      content changes, but I like having everything synced up to frames

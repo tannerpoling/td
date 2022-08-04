@@ -1,0 +1,81 @@
+- TODO: 
+  - use config file for server address, port, and touchdesigner operator names.
+    needs to be the same across tdServer, tdTableUpdate, pyClient, and touchdesigner file;
+    annoying to change in multiple places
+    - if everything was running in touchdesigner this would be easy; just have every file 
+      look at some operator which is set up to contain all config data
+    - easy to just read a text file and set variables accordingly in python
+    - don't have google to help with file i/o, do later
+  - figure out how to recolor image in 1px vertical lines across the screen
+  - learn more about how kinect, pointclouds work
+
+
+
+
+****** LOG ******
+
+2022-08-01
+- test setup for table incoming data
+- experimenting with this vertical bar shader idea...
+  - idea 1: use Cache TOP
+    - 1 rectangle whose current shade is determined by current value of
+    dataTable (will update every frame), piped into cache
+    - cache of size 1280. will store 1x720 rectangles
+    - need 1280 cache select's in order to grab every single rectangle...
+  - idea 2: use scripts to make a table of past 1280 values
+    - replicator COMP works based off of a table!
+    - seems a bit more straightforward
+    - if we have a table of last 1280 values, replicator can look at
+      index based on rectangle TOP names!
+    - this works, but cpu usage jumps to 100%
+      as soon as update script is enabled...
+    - by comparison, the cache TOP of size 1280 only brings gpu usage to 35%
+  - ended up needing to go with idea 1
+    - use a replicator on the cache select?
+    - remembering how to use replicator
+      - if you have an operator 'test1' and want it's '1' digit, 
+        use me.digits to reference in a parameter
+    - replicate cacheSelect based on table with 1280 entries
+      - keep this contained in a container comp
+    - each cacheSelect selects based on me.digits
+    - me.digits doesn't seem to be working? NOTE: cache index can only be <= 1!!! thats why it wouldnt go past 1
+      - 1 = current frame
+    - operators are generated and *should* be working, no display :/
+      - NOTE: can't use a NULL with a cache!! need to actually point to the cache chop itself
+    - working!! woo 
+    - test: 128 10x720 rectangles
+      - have all 128 replicants and running fine. 
+        tried putting everything into one composite TOP, but dont think it can do translations for each rectangle...
+      - current idea: cacheSelect (10x720 res) + constant (1280 x 720 res) in composite TOP
+        - shift over based on me.digits again. current set up is 128 10x720 rectangles
+
+2022-07-29
+- everything configured to work with numpy array
+- server not working in touchdesigner, unable to run tdServer.py
+
+touchdesigner network notes
+general idea: test by vertically shifting video input based on oscillating, live-updating data running across screen
+- want a line going across the screen that is really a trail based on most recent height value of rightmost section
+  - the "modifier grid"?
+- making the modifier grid:
+    - break up screen into 1 px width x screen height rectangles
+    - just use a cache! was thinking about trying to use a feedback effect for the line, kind of silly
+    - each line along the modifier grid looks at its corresponding spot in the cache
+      - example: 1080 x 1920 screen = 1920 vertical lines
+      - line 1920 looks at cache[0] for its value to use to color itself
+    - to keep things simple, convert data value from cache to 0-1.0 range before coloring each vertical bar of modifier grid
+    - how to actually make the rectangles?
+      - manual way: make 1920 1x1080 rectangles, each one shifted over a little bit
+        - names will number themselves -> easier to do scripting stuff
+        - seems kind of dumb either way
+      - programmatic ways
+        - just need something to recolor each vertical stripe based on corresponding cache value
+        - shader?
+        - some sort of script TOP that can recolor an image? can you even do that in touchdesigner?
+- actually shifting the video input
+  - also not sure how this would work
+  - need to take each 1x1080 strip of the video feed and shift it...
+    - would be cool to shift in z axis and have camera at an angle to the rendered output
+  - for the kinect / pointcloud version, gets even more confusing lol
+    - or does it? just unsure how pointcloud modifications work in touchdesigner entirely
+    - need to understand what kind of data the kinect gives you to mess with...
